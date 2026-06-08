@@ -45,7 +45,7 @@ const connectDB = async () => {
         console.error('MongoDB connection error:', err);
     }
 };
-connectDB();
+// connectDB();
 
 import courseRoutes from './routes/courseRoutes';
 import chatRoutes from './routes/chatRoutes';
