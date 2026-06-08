@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 
 const EMAILJS_SERVICE_ID = 'service_3t3157e';
 const EMAILJS_TEMPLATE_ID = 'template_fsn1w86';

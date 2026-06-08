@@ -1,5 +1,4 @@
 import express from 'express';
-import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
 import { Order } from '../models/Order';

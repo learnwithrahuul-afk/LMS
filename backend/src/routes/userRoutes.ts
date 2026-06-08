@@ -5,7 +5,6 @@ import { Order } from '../models/Order';
 
 const router = express.Router();
 import { sendEmail } from '../utils/emailService';
-import fetch from 'node-fetch';
 
 // Send OTP
 router.options('/send-otp', (req, res) => res.sendStatus(200));
