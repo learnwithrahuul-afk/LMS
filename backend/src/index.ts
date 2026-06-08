@@ -51,9 +51,9 @@ import courseRoutes from './routes/courseRoutes';
 import chatRoutes from './routes/chatRoutes';
 
 import adminRoutes from './routes/adminRoutes';
-import paymentRoutes from './routes/paymentRoutes';
+// import paymentRoutes from './routes/paymentRoutes';
 import certificateRoutes from './routes/certificateRoutes';
-import instructorRoutes from './routes/instructorRoutes';
+// import instructorRoutes from './routes/instructorRoutes';
 
 app.get('/', (req, res) => {
     res.send('Server is running');
@@ -63,12 +63,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/payment', paymentRoutes);
+// app.use('/api/payment', paymentRoutes);
 app.use('/api/certificate', certificateRoutes);
 import assessmentRoutes from './routes/assessmentRoutes';
 app.use('/api/assessment', assessmentRoutes);
 
-app.use('/api/instructor', instructorRoutes);
+// app.use('/api/instructor', instructorRoutes);
 
 
 
