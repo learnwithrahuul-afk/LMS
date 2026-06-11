@@ -718,6 +718,7 @@
     border-radius: 50%;
     background-color: white;
     padding: 5px;
+    object-fit: contain;
 }
 
 .footer-logo-text {
