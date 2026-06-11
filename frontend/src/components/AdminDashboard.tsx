@@ -446,6 +446,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                         <tr className="border-b border-gray-100 text-gray-400 text-xs font-bold uppercase tracking-wider">
                             <th className="pb-4">Name</th>
                             <th className="pb-4">Email</th>
+                            <th className="pb-4">Progress</th>
                             <th className="pb-4">Assessment</th>
                             <th className="pb-4">Role</th>
                             <th className="pb-4 text-right">Actions</th>
@@ -456,6 +457,21 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                             <tr key={u._id} className="hover:bg-gray-50/50 transition-colors">
                                 <td className="py-4 font-bold text-gray-800">{u.fullName || 'N/A'}</td>
                                 <td className="py-4 font-mono text-xs text-gray-500">{u.email}</td>
+                                <td className="py-4">
+                                    {(() => {
+                                        const completed = u.completedModules?.length || 0;
+                                        const total = modules.length > 0 ? modules.length : 1;
+                                        const percent = Math.min(100, Math.round((completed / total) * 100));
+                                        return (
+                                            <div className="flex items-center space-x-2 w-28">
+                                                <div className="flex-1 bg-gray-100 rounded-full h-2.5 shadow-inner">
+                                                    <div className={`h-2.5 rounded-full shadow-sm transition-all duration-500 ${percent === 100 ? 'bg-[#0FA958]' : 'bg-blue-500'}`} style={{ width: `${percent}%` }}></div>
+                                                </div>
+                                                <span className="text-xs font-bold text-gray-600">{percent}%</span>
+                                            </div>
+                                        );
+                                    })()}
+                                </td>
                                 <td className="py-4">
                                     {(() => {
                                         const assessment = u.courseAssessments?.find(a => a.courseId === 'csv-course') || u.finalAssessment;
