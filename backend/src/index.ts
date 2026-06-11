@@ -10,6 +10,8 @@ import userRoutes from './routes/userRoutes';
 
 const app = express();
 const allowedOrigins = [
+    'https://learnwithrahuul.com',
+    'https://www.learnwithrahuul.com',
     'https://lms-frontend-blue-mu.vercel.app',
     'http://localhost:5173',
     'https://lms-frontend-rouge-eta.vercel.app',
