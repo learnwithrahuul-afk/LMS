@@ -162,16 +162,17 @@ const CertificateVerification: React.FC = () => {
                                 <h3 className="text-lg sm:text-xl font-bold tracking-wide text-center">Authentic Credential Verified</h3>
                             </div>
                             
-                            <div className="bg-white p-2 sm:p-6 rounded-b-3xl shadow-2xl border border-t-0 border-gray-100 w-full flex justify-center">
-                                {/* The Certificate component naturally handles its own scaling logic based on parent width */}
-                                <div className="w-full">
-                                    <Certificate
-                                        userName={verificationResult.studentName}
-                                        courseName={verificationResult.courseName}
-                                        date={new Date(verificationResult.issueDate).toLocaleDateString()}
-                                        certificateId={verificationResult.certificateId}
-                                        language="ENGLISH"
-                                    />
+                            <div className="bg-white p-4 sm:p-8 rounded-b-3xl shadow-2xl border border-t-0 border-gray-100 w-full relative z-10 overflow-hidden">
+                                <div className="w-full overflow-x-auto custom-scrollbar pb-4 relative">
+                                    <div className="min-w-[min(100%,1123px)] flex justify-center">
+                                        <Certificate
+                                            userName={verificationResult.studentName}
+                                            courseName={verificationResult.courseName}
+                                            date={new Date(verificationResult.issueDate).toLocaleDateString()}
+                                            certificateId={verificationResult.certificateId}
+                                            language="ENGLISH"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
