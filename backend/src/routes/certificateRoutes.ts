@@ -159,7 +159,7 @@ router.post('/issue', async (req, res) => {
     }
 });
 
-import { sendEmail } from '../utils/emailService';
+import { sendCertificateEmail } from '../utils/emailService';
 
 // Send Certificate Email
 router.post('/email', async (req, res) => {
@@ -172,26 +172,17 @@ router.post('/email', async (req, res) => {
 
         console.log(`Sending certificate email to ${email} for course ${courseId || courseName}`);
 
-        // Construct message
-        const downloadLink = `https://quantxai.com/verify/${certificateId}`; // Main View/Download Link
-        const verificationLink = `https://quantxai.com/verify`; // General verification page
+        const downloadLink = `https://learnwithrahuul.com/verify/${certificateId}`; // Main View/Download Link
+        const verificationLink = `https://learnwithrahuul.com/verify`; // General verification page
 
-        const emailMessage = `Dear ${studentName},\n\nCongratulations on successfully completing the course "${courseName}"!\n\nYour certificate has been generated and verified.\n\nCertificate ID: ${certificateId}\n\nView and Download Your Certificate:\n${downloadLink}\n\nVerify Authenticity:\nYou can verify this certificate at any time by visiting:\n${verificationLink}\nand entering your Certificate ID.\n\nBest regards,\nGenesys Quantis Team`;
-
-        // Attempt to send email
-        // Note: imageData is base64 string. We pass it, though helper might not fully utilize it as attachment depending on service setup.
-        // For robust attachments, use imageData to generate file or embed.
-
-        const result = await sendEmail(email, emailMessage, imageData, `Certificate_${certificateId}.png`, 'template_73rhufh', {
-            student_name: studentName,
-            course_name: courseName,
-            certificate_id: certificateId,
-            certificate_link: downloadLink,
-            verify_link: verificationLink,
-            company_name: "Genesys Quantis",
-            company_email: "info@quant-xai.com",
-            logo_url: "https://your-public-bucket.com/logo.png" // Replace with actual hosted logo if needed
-        });
+        const result = await sendCertificateEmail(
+            email,
+            studentName,
+            courseName,
+            certificateId,
+            downloadLink,
+            verificationLink
+        );
 
         if (result.success) {
             res.json({ success: true, message: 'Email sent successfully' });

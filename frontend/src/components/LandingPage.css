@@ -760,6 +760,23 @@
 }
 
 
+/* Community Section */
+.community-card {
+    background: #f8f9fa;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: block;
+}
+
+.community-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-color: #0FA958;
+    background-color: white;
+}
+
 /* Animations & Modern FX */
 @keyframes float-gentle-1 {
     0% { transform: translateY(0px) rotate(0deg); }
@@ -1116,6 +1133,30 @@
     box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
 }
 
+/* LinkedIn Floating Button */
+.linkedin-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 115px; /* Above WhatsApp */
+    right: 40px;
+    background-color: #0077b5;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.linkedin-float:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+}
+
 @media (max-width: 768px) {
     .whatsapp-float {
         width: 50px;
@@ -1124,6 +1165,16 @@
         right: 20px;
     }
     .whatsapp-float svg {
+        width: 25px;
+        height: 25px;
+    }
+    .linkedin-float {
+        width: 50px;
+        height: 50px;
+        bottom: 85px; /* Above WhatsApp */
+        right: 20px;
+    }
+    .linkedin-float svg {
         width: 25px;
         height: 25px;
     }

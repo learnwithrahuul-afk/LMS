@@ -1,6 +1,7 @@
 import express from 'express';
 import { User } from '../models/User';
 import { Module } from '../models/Module';
+import { sendWelcomeEmail } from '../utils/emailService';
 
 const router = express.Router();
 
@@ -30,10 +31,16 @@ router.post('/users', async (req, res) => {
 
         const newUser = new User({
             email,
+            password,
             ...rest,
             isPaid: true // Auto-authorize users added by admin
         });
         await newUser.save();
+
+        // Send welcome email with login credentials
+        const loginLink = "https://learnwithrahuul.com/login"; // Replace with actual login link if different
+        await sendWelcomeEmail(email, rest.fullName || email.split('@')[0], password, loginLink);
+
         res.status(201).json(newUser);
     } catch (error) {
         console.error("Error creating user:", error);

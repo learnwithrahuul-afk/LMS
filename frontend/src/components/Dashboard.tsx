@@ -31,7 +31,7 @@ const Dashboard = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isWindowBlurred, setIsWindowBlurred] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [user, setUser] = useState<{ email: string; fullName?: string; completedModules?: string[]; state?: string; language?: string; dob?: string; gender?: string; role?: string; isPaid?: boolean; enrolledCourses?: string[]; finalAssessment?: { score: number; passed: boolean; attempts: number; }; courseAssessments?: { courseId: string; score: number; passed: boolean; attempts: number; }[] } | null>(null);
+    const [user, setUser] = useState<{ email: string; fullName?: string; completedModules?: string[]; state?: string; language?: string; dob?: string; gender?: string; role?: string; isPaid?: boolean; enrolledCourses?: string[]; finalAssessment?: { score: number; passed: boolean; attempts: number; }; courseAssessments?: { courseId: string; score: number; passed: boolean; attempts: number; date?: string; }[] } | null>(null);
     const [currentModule, setCurrentModule] = useState<any>(null);
     const [modules, setModules] = useState<any[]>([]);
     const [showOutput, setShowOutput] = useState(false);
@@ -1093,6 +1093,9 @@ const Dashboard = () => {
                                                     const initialCertId = isCompleted(activeCourseId) ? activeCourseId : completedCourses[0]?.id;
                                                     const displayCertId = viewCertificateId || initialCertId || activeCourseId;
 
+                                                    const assessment = user?.courseAssessments?.find(a => a.courseId === displayCertId);
+                                                    const certDate = assessment?.date ? new Date(assessment.date).toLocaleDateString() : new Date().toLocaleDateString();
+
                                                     return (
                                                         <Certificate
                                                             key={displayCertId}
@@ -1101,6 +1104,7 @@ const Dashboard = () => {
                                                             courseId={displayCertId}
                                                             language={settingsLanguage}
                                                             userEmail={user.email}
+                                                            date={certDate}
                                                         />
                                                     );
                                                 })()}
@@ -1248,6 +1252,55 @@ const Dashboard = () => {
                                         >
                                             Start Learning
                                         </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Final Assessment & Certificate Showcase */}
+                            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8 shadow-sm border border-blue-100 mt-6 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-40 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                                <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                                    <div className="flex items-center gap-6">
+                                        <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-lg ${user?.courseAssessments?.some(a => a.courseId === activeCourseId && a.passed) || (activeCourseId === 'csv-course' && user?.finalAssessment?.passed) ? 'bg-[#0FA958] text-white' : 'bg-white text-blue-600'}`}>
+                                            <Award size={40} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-[#0A2A66] mb-2">Final Assessment & Certificate</h3>
+                                            {user?.courseAssessments?.some(a => a.courseId === activeCourseId && a.passed) || (activeCourseId === 'csv-course' && user?.finalAssessment?.passed) ? (
+                                                <p className="text-gray-700">Congratulations! You have passed the final assessment and unlocked your certificate.</p>
+                                            ) : courseProgress >= 100 ? (
+                                                <p className="text-gray-700">You have completed all modules! Take the AI-powered final assessment to earn your certificate (85% required).</p>
+                                            ) : (
+                                                <p className="text-gray-700">Complete all modules to unlock the AI-powered final assessment and earn your certificate.</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {user?.courseAssessments?.some(a => a.courseId === activeCourseId && a.passed) || (activeCourseId === 'csv-course' && user?.finalAssessment?.passed) ? (
+                                            <button 
+                                                onClick={() => {
+                                                    setView('certificate');
+                                                    window.scrollTo(0, 0);
+                                                }}
+                                                className="bg-[#0FA958] hover:bg-[#0c8746] text-white px-8 py-4 rounded-xl font-bold shadow-lg transition-all hover:scale-105 flex items-center whitespace-nowrap"
+                                            >
+                                                View Certificate <ArrowRight size={20} className="ml-2" />
+                                            </button>
+                                        ) : courseProgress >= 100 ? (
+                                            <button 
+                                                onClick={() => startAssessment()}
+                                                className="bg-[#0A2A66] hover:bg-blue-800 text-white px-8 py-4 rounded-xl font-bold shadow-lg transition-all hover:scale-105 flex items-center whitespace-nowrap"
+                                            >
+                                                Start Final Assessment <ArrowRight size={20} className="ml-2" />
+                                            </button>
+                                        ) : (
+                                            <button 
+                                                disabled
+                                                className="bg-gray-300 text-gray-500 px-8 py-4 rounded-xl font-bold flex items-center whitespace-nowrap cursor-not-allowed"
+                                            >
+                                                Locked ({Math.round(courseProgress)}%) <span className="ml-2">🔒</span>
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>

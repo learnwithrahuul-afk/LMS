@@ -266,26 +266,31 @@ const Certificate: React.FC<CertificateProps> = ({
         }
     };
 
-    const shareOnLinkedIn = async () => {
-        if (certificateRef.current) {
-            // Temporarily reset scale
-            const currentTransform = certificateRef.current.style.transform;
-            certificateRef.current.style.transform = 'scale(1)';
+    const shareOnLinkedIn = () => {
+        let issueYear = new Date().getFullYear();
+        let issueMonth = new Date().getMonth() + 1;
 
-            const canvas = await html2canvas(certificateRef.current, {
-                scale: 2,
-                useCORS: true,
-                windowWidth: 1123,
-                windowHeight: 794
-            });
-
-            // Restore scale
-            certificateRef.current.style.transform = currentTransform;
-
-            const text = `I am proud to announce that I have successfully completed the "${courseName}" course! 🎓\n\nVerified Certificate ID: ${finalCertificateId}\n\n#AIForAll #DigitalIndia #Learning #QuantXAI`;
-            const url = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+        try {
+            const parsedDate = new Date(date);
+            if (!isNaN(parsedDate.getTime())) {
+                issueYear = parsedDate.getFullYear();
+                issueMonth = parsedDate.getMonth() + 1;
+            }
+        } catch (e) {
+            console.error("Error parsing date for LinkedIn", e);
         }
+
+        const baseUrl = 'https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME';
+        const params = new URLSearchParams({
+            name: courseName,
+            organizationName: 'Learn With Rahuul',
+            issueYear: issueYear.toString(),
+            issueMonth: issueMonth.toString(),
+            certUrl: verificationUrl,
+            certId: finalCertificateId
+        });
+
+        window.open(`${baseUrl}&${params.toString()}`, '_blank');
     };
 
     return (

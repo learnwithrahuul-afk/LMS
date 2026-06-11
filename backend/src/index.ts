@@ -54,6 +54,7 @@ import adminRoutes from './routes/adminRoutes';
 import paymentRoutes from './routes/paymentRoutes';
 import certificateRoutes from './routes/certificateRoutes';
 import instructorRoutes from './routes/instructorRoutes';
+import contactRoutes from './routes/contactRoutes';
 
 app.get('/', (req, res) => {
     res.send('Server is running');
@@ -69,6 +70,7 @@ import assessmentRoutes from './routes/assessmentRoutes';
 app.use('/api/assessment', assessmentRoutes);
 
 app.use('/api/instructor', instructorRoutes);
+app.use('/api/contact', contactRoutes);
 
 
 

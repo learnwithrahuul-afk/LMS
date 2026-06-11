@@ -3,7 +3,8 @@ import Dashboard from './components/Dashboard';
 import LandingPage from './components/LandingPage';
 import CoursePage from './components/CoursePage';
 import CertificateVerification from './components/CertificateVerification';
-
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         <Route path="/course/:courseId" element={<CoursePageWrapper />} />
         <Route path="/verify" element={<CertificateVerification />} />
         <Route path="/verify/:id" element={<CertificateVerification />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

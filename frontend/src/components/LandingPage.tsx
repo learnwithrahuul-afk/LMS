@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
-import { CheckCircle, ChevronDown, ChevronUp, Play, Star, BookOpen, PenTool, Layers, Target, GraduationCap, Microscope, Laptop, ClipboardCheck, Download } from 'lucide-react';
+import { CheckCircle, ChevronDown, ChevronUp, Play, Star, BookOpen, PenTool, Layers, Target, GraduationCap, Microscope, Laptop, ClipboardCheck, Download, MessageCircle } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 interface LandingPageProps {
     onStart: () => void;
@@ -10,6 +11,42 @@ interface LandingPageProps {
 const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
     const [openAccordion, setOpenAccordion] = useState<number | null>(0);
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [enrollData, setEnrollData] = useState({ name: '', email: '', phone: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [toastState, setToastState] = useState<'hidden' | 'showing' | 'hiding'>('hidden');
+
+    const handleEnrollSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: enrollData.name,
+                    email: enrollData.email,
+                    message: `Enrollment Request - Phone: ${enrollData.phone}`
+                }),
+            });
+            const data = await response.json();
+            if (data.success) {
+                setToastState('showing');
+                setEnrollData({ name: '', email: '', phone: '' });
+                
+                // Hide animation after 4.5 seconds
+                setTimeout(() => setToastState('hiding'), 4500);
+                // Completely unmount after 5 seconds
+                setTimeout(() => setToastState('hidden'), 5000);
+            } else {
+                alert('Failed to send request: ' + data.message);
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('An error occurred. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -96,6 +133,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
 
     return (
         <div className="landing-container">
+            {toastState !== 'hidden' && (
+                <div className={`custom-toast ${toastState === 'hiding' ? 'hiding' : ''}`}>
+                    <div className="custom-toast-icon">
+                        <CheckCircle size={20} strokeWidth={3} />
+                    </div>
+                    <div className="custom-toast-content">
+                        <span className="custom-toast-title">Request Sent!</span>
+                        <span className="custom-toast-desc">We will contact you shortly via email.</span>
+                    </div>
+                </div>
+            )}
             {/* Header */}
             <header className="landing-header">
                 <div className="logo-container">
@@ -380,20 +428,22 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                         <h2 className="pricing-title" style={{ fontSize: '1.8rem' }}>Enroll Now</h2>
                         <p style={{ color: '#666', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Fill in your details and we'll get you started.</p>
 
-                        <form onSubmit={(e) => { e.preventDefault(); onStart(); }} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
+                        <form onSubmit={handleEnrollSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
                             <div>
                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#0A2A66', marginBottom: '0.4rem' }}>Full Name</label>
-                                <input type="text" placeholder="Enter your full name" required style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
+                                <input type="text" placeholder="Enter your full name" required value={enrollData.name} onChange={(e) => setEnrollData({...enrollData, name: e.target.value})} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
                             </div>
                             <div>
                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#0A2A66', marginBottom: '0.4rem' }}>Email Address</label>
-                                <input type="email" placeholder="Enter your email" required style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
+                                <input type="email" placeholder="Enter your email" required value={enrollData.email} onChange={(e) => setEnrollData({...enrollData, email: e.target.value})} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
                             </div>
                             <div>
                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#0A2A66', marginBottom: '0.4rem' }}>Phone Number</label>
-                                <input type="tel" placeholder="Enter your phone number" required style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
+                                <input type="tel" placeholder="Enter your phone number" required value={enrollData.phone} onChange={(e) => setEnrollData({...enrollData, phone: e.target.value})} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
                             </div>
-                            <button type="submit" className="cta-button pricing-cta" style={{ marginTop: '0.5rem' }}>Secure Your Seat Now →</button>
+                            <button type="submit" disabled={isSubmitting} className="cta-button pricing-cta" style={{ marginTop: '0.5rem', opacity: isSubmitting ? 0.7 : 1 }}>
+                                {isSubmitting ? 'Sending Request...' : 'Secure Your Seat Now →'}
+                            </button>
                         </form>
                     </div>
 
@@ -410,6 +460,46 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                             <li><CheckCircle size={18} color="#0FA958" /> Full lifetime access</li>
                         </ul>
                     </div>
+                </div>
+            </section>
+
+            {/* Global Communities Section */}
+            <section className="community-section animate-on-scroll" style={{ padding: '5rem 5%', backgroundColor: '#ffffff', textAlign: 'center' }}>
+                <h2 className="section-title">Join Our Global Communities</h2>
+                <p style={{ color: '#666', marginBottom: '3rem', fontSize: '1.1rem' }}>Connect with professionals, get industry updates, and find job opportunities directly on WhatsApp.</p>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', maxWidth: '1100px', margin: '0 auto' }}>
+                    <a href="https://chat.whatsapp.com/LsyHuNyCRs74JYG2Nf2duv?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
+                        <div className="community-icon-wrapper" style={{ backgroundColor: '#e6f4ea', color: '#0FA958', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
+                            <MessageCircle size={32} />
+                        </div>
+                        <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>India Community</h3>
+                        <p style={{ color: '#666', fontSize: '0.9rem' }}>Join the network of CSV professionals in India.</p>
+                    </a>
+                    
+                    <a href="https://chat.whatsapp.com/CtMFPtBCkMy8qv3kBB4axx?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
+                        <div className="community-icon-wrapper" style={{ backgroundColor: '#e6f4ea', color: '#0FA958', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
+                            <MessageCircle size={32} />
+                        </div>
+                        <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>Ireland Community</h3>
+                        <p style={{ color: '#666', fontSize: '0.9rem' }}>Connect with validation experts in Ireland.</p>
+                    </a>
+                    
+                    <a href="https://chat.whatsapp.com/EmUsbRTy1s7KnN2jmJrlPZ?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
+                        <div className="community-icon-wrapper" style={{ backgroundColor: '#e6f4ea', color: '#0FA958', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
+                            <MessageCircle size={32} />
+                        </div>
+                        <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>USA Community</h3>
+                        <p style={{ color: '#666', fontSize: '0.9rem' }}>Network with pharma IT professionals across the US.</p>
+                    </a>
+                    
+                    <a href="https://chat.whatsapp.com/CIXsFhFmxyq7vIGVAglbSg?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
+                        <div className="community-icon-wrapper" style={{ backgroundColor: '#fff3cd', color: '#D4AF37', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
+                            <MessageCircle size={32} />
+                        </div>
+                        <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>Jobs & Opportunities</h3>
+                        <p style={{ color: '#666', fontSize: '0.9rem' }}>Exclusive CSV job postings and referrals.</p>
+                    </a>
                 </div>
             </section>
 
@@ -434,15 +524,21 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                 <h3 className="footer-text">Your Career Transformation Starts Here</h3>
 
                 <div className="footer-links">
-                    <a href="#">Contact Us</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="#contact">Contact Us</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
                 </div>
 
                 <div className="footer-bottom">
                     &copy; {new Date().getFullYear()} Learn With Rahuul. All rights reserved.
                 </div>
             </footer>
+            {/* LinkedIn Floating Button */}
+            <a href="https://www.linkedin.com/in/rahuul-varma-d-793802150/" target="_blank" rel="noopener noreferrer" className="linkedin-float">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
+                </svg>
+            </a>
             {/* WhatsApp Floating Button */}
             <a href="https://wa.me/917036915353" target="_blank" rel="noopener noreferrer" className="whatsapp-float">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">

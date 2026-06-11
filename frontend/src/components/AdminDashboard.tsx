@@ -22,6 +22,12 @@ interface User {
         passed: boolean;
         attempts: number;
     };
+    courseAssessments?: {
+        courseId: string;
+        score: number;
+        passed: boolean;
+        attempts: number;
+    }[];
 }
 
 interface Section {
@@ -440,6 +446,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                         <tr className="border-b border-gray-100 text-gray-400 text-xs font-bold uppercase tracking-wider">
                             <th className="pb-4">Name</th>
                             <th className="pb-4">Email</th>
+                            <th className="pb-4">Assessment</th>
                             <th className="pb-4">Role</th>
                             <th className="pb-4 text-right">Actions</th>
                         </tr>
@@ -449,6 +456,22 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                             <tr key={u._id} className="hover:bg-gray-50/50 transition-colors">
                                 <td className="py-4 font-bold text-gray-800">{u.fullName || 'N/A'}</td>
                                 <td className="py-4 font-mono text-xs text-gray-500">{u.email}</td>
+                                <td className="py-4">
+                                    {(() => {
+                                        const assessment = u.courseAssessments?.find(a => a.courseId === 'csv-course') || u.finalAssessment;
+                                        if (assessment && assessment.attempts > 0) {
+                                            return (
+                                                <div className="flex flex-col">
+                                                    <span className={`text-xs font-bold ${assessment.passed ? 'text-green-600' : 'text-orange-500'}`}>
+                                                        {assessment.passed ? 'PASSED' : 'FAILED'} ({assessment.score}%)
+                                                    </span>
+                                                    <span className="text-[10px] text-gray-400">Attempts: {assessment.attempts}</span>
+                                                </div>
+                                            );
+                                        }
+                                        return <span className="text-xs text-gray-400">Not taken</span>;
+                                    })()}
+                                </td>
                                 <td className="py-4">
                                     <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
                                         u.role === 'admin' ? 'bg-purple-100 text-purple-700' :
