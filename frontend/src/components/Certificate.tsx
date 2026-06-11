@@ -344,26 +344,28 @@ const Certificate: React.FC<CertificateProps> = ({
             </div>
 
             <div
-                className="relative mb-8 flex justify-center overflow-visible premium-cert-wrapper"
+                className="relative mb-8 premium-cert-wrapper mx-auto"
                 style={{
-                    width: '100%',
+                    width: `${1123 * scale}px`,
                     height: `${794 * scale}px`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    maxWidth: '100%'
                 }}
             >
                 {/* Certificate Container */}
                 <div
                     ref={certificateRef}
-                    className="relative text-gray-800 shadow-2xl flex flex-col justify-between box-border origin-top select-none overflow-hidden premium-cert-container p-[52px]"
+                    className="text-gray-800 shadow-2xl flex flex-col justify-between box-border select-none overflow-hidden premium-cert-container p-[52px]"
                     style={{
                         width: '1123px',
                         height: '794px',
                         minWidth: '1123px',
                         minHeight: '794px',
                         transform: `scale(${scale})`,
-                        background: '#ffffff'
+                        transformOrigin: 'top left',
+                        background: '#ffffff',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0
                     }}
                 >
                     {/* SVG Corner Wave Borders with Gradients */}
