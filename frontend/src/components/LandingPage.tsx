@@ -158,8 +158,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                     <a href="#contact">Contact</a>
                 </nav>
                 <div className="header-actions">
-                    <span className="header-call">Call: 7036915353</span>
-                    <a href="#contact" className="cta-button secondary" style={{ textDecoration: 'none' }}>Book a Demo</a>
+                    <span className="header-call">Call: +91 7036915353</span>
+                    <a href="#enroll" className="cta-button secondary" style={{ textDecoration: 'none' }}>Book a Demo</a>
                     <button className="cta-button" onClick={onStart}>Enroll Now</button>
                 </div>
             </header>
@@ -419,7 +419,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
             </section>
 
             {/* Enrollment Section */}
-            <section className="pricing-section animate-on-scroll" style={{ padding: '5rem 5%' }}>
+            <section id="enroll" className="pricing-section animate-on-scroll" style={{ padding: '5rem 5%' }}>
                 <div style={{ display: 'flex', gap: '3rem', maxWidth: '950px', width: '100%', alignItems: 'stretch', flexWrap: 'wrap' }}>
 
                     {/* Left - Form */}
