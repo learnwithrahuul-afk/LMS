@@ -39,7 +39,7 @@ const Certificate: React.FC<CertificateProps> = ({
             const cached = localStorage.getItem(storageKey);
             if (cached) return cached;
         }
-        return 'QX-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        return 'LWR-' + Math.random().toString(36).substr(2, 9).toUpperCase();
     });
 
     const [backendCertId, setBackendCertId] = useState<string | null>(null);
@@ -58,7 +58,7 @@ const Certificate: React.FC<CertificateProps> = ({
     const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
     const [scale, setScale] = useState(1);
 
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://quantxai.com';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://learnwithrahuul.com';
     // Use the verification URL pointing to our frontend route
     const verificationUrl = `${origin}/verify/${finalCertificateId}`;
 
