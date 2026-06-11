@@ -58,7 +58,7 @@ const Certificate: React.FC<CertificateProps> = ({
     const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
     const [scale, setScale] = useState(1);
 
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://learnwithrahuul.com';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.learnwithrahuul.com';
     // Use the verification URL pointing to our frontend route
     const verificationUrl = `${origin}/verify/${finalCertificateId}`;
 
