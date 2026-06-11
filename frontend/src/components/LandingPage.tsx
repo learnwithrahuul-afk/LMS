@@ -151,11 +151,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                     <span className="logo-text">Learn With Rahuul</span>
                 </div>
                 <nav className="nav-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About Course</a>
-                    <a href="#curriculum">Curriculum</a>
-                    <a href="#testimonials">Customers</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#home" title="Learn With Rahuul - Home">Home</a>
+                    <a href="#about" title="About CSV Course by Rahuul Varma">About Course</a>
+                    <a href="#curriculum" title="View the CSV & Pharma IT Curriculum">Curriculum</a>
+                    <a href="#testimonials" title="CSV Course Success Stories">Customers</a>
+                    <a href="#contact" title="Contact Learn With Rahuul">Contact</a>
                 </nav>
                 <div className="header-actions">
                     <span className="header-call">Call: +91 7036915353</span>
@@ -178,10 +178,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                         <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#d48806' }}>5.0 Rating by 500+ Professionals</span>
                     </div>
                     <h1 className="hero-title">
-                        Break Into Pharma IT & Become a <span style={{ color: '#0FA958' }}>Certified Validation Expert</span>
+                        Break Into Pharma IT & Become a <span style={{ color: '#0FA958' }}>Certified CSV Validation Expert</span>
                     </h1>
                     <p className="hero-subtitle">
-                        The pharma industry is facing a massive CSV talent shortage. This 5-module, job-ready program transforms IT professionals and freshers into certified validation specialists — with placement support and real-world project experience.
+                        The pharma industry is facing a massive CSV talent shortage. This 5-module, job-ready program by <strong>Learn With Rahuul</strong> transforms IT professionals and freshers into certified Computer System Validation (CSV) specialists — with placement support and real-world project experience.
                     </p>
                     <div className="hero-buttons">
                         <button className="cta-button" onClick={onStart}>Start Your Transformation →</button>
@@ -521,7 +521,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                     <img src="/Logo.jpeg" alt="Learn With Rahuul" className="footer-logo" />
                     <span className="footer-logo-text">Learn With Rahuul</span>
                 </div>
-                <h3 className="footer-text">Your Career Transformation Starts Here</h3>
+                <h3 className="footer-text">Your CSV Career Transformation Starts Here with Learn With Rahuul</h3>
 
                 <div className="footer-links">
                     <a href="#contact">Contact Us</a>
