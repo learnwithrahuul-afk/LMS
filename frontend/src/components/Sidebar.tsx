@@ -52,8 +52,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="w-64 bg-white h-full flex flex-col z-10">
             <div className="p-4 border-b border-gray-200 bg-[#0A2A66] text-white">
                 <div className="flex items-center space-x-2 mb-4 bg-white p-2 rounded-lg justify-center shadow-inner">
-                    <img src="/Logo.jpeg" alt="Learn With Rahuul" className="h-10 object-contain" />
-                    <span className="font-extrabold text-[#0A2A66] leading-tight">Learn With Rahuul</span>
+                    <img src="/logo2.png" alt="Learn With Rahuul" className="h-10 object-contain" />
+
                 </div>
 
                 {/* Course Switcher */}
@@ -96,11 +96,11 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div className="flex-1 overflow-y-auto py-4">
                 <div className="px-4 mb-2 space-y-2">
                     {onHomeClick && (
-                        <div 
+                        <div
                             onClick={onHomeClick}
                             className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition-colors ${view === 'home' ? 'bg-[#0FA958] text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
                             <span className="font-medium">Dashboard Home</span>
                         </div>
                     )}

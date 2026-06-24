@@ -19,8 +19,8 @@ const Login: React.FC<LoginProps> = ({ onLogin, isLoading = false }) => {
         <div className="flex items-center justify-center h-screen bg-gradient-to-br from-[#f8f9fa] to-[#eef2f7]">
             <div className="bg-white p-10 rounded-xl shadow-2xl w-96 transform transition-all hover:scale-105 border-t-4 border-[#D4AF37]">
                 <div className="flex flex-col items-center justify-center mb-6 gap-3">
-                    <img src="/Logo.jpeg" alt="Learn With Rahuul" className="h-16 object-contain rounded-md" />
-                    <span className="text-2xl font-extrabold text-[#0A2A66] tracking-tight">Learn With Rahuul</span>
+                    <img src="/logo2.png" alt="Learn With Rahuul" className="h-16 object-contain rounded-md" />
+
                 </div>
                 <h2 className="text-3xl font-bold mb-2 text-center text-[#0A2A66]">Welcome Back</h2>
                 <p className="text-center text-gray-500 mb-8">Enter your email to access your dashboard</p>

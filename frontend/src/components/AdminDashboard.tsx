@@ -117,8 +117,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
 
     // Course Mapping
     const courseNames: Record<string, string> = {
-    'csv-course': 'Computerized System Validation'
-};
+        'csv-course': 'Computerized System Validation'
+    };
 
     // Helper to get course color
     const getCourseColor = (courseId: string) => {
@@ -380,7 +380,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                     </div>
                 </div>
             </div>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <div>
@@ -403,7 +403,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <div>
                         <h4 className="text-lg font-bold text-[#0A2A66] mb-4">Platform Info</h4>
@@ -439,7 +439,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                 </div>
                 <button onClick={handleAddUser} className="flex items-center bg-gradient-to-r from-[#0FA958] to-[#12c467] text-white px-5 py-2.5 rounded-xl font-bold shadow-md shadow-[#0FA958]/20 hover:opacity-95 transition-all"><Plus size={18} className="mr-2" /> Add New User</button>
             </div>
-            
+
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
@@ -489,10 +489,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                                     })()}
                                 </td>
                                 <td className="py-4">
-                                    <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
-                                        u.role === 'admin' ? 'bg-purple-100 text-purple-700' :
-                                        u.role === 'instructor' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'
-                                    }`}>
+                                    <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' :
+                                            u.role === 'instructor' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'
+                                        }`}>
                                         {u.role}
                                     </span>
                                 </td>
@@ -520,7 +519,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                     <Search className="absolute left-3.5 top-3 text-gray-400" size={18} />
                 </div>
             </div>
-            
+
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
                 <div className="flex items-center space-x-3">
                     <span className="font-bold text-gray-700 text-sm">Filter by Course:</span>
@@ -590,19 +589,19 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
             <div className="w-64 bg-gradient-to-b from-[#0A2A66] to-[#081F4D] text-white flex flex-col shadow-2xl z-10 h-screen sticky top-0">
                 <div className="p-6 pb-4 border-b border-white/10 flex flex-col items-center">
                     <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3 w-full flex items-center justify-center mb-3 shadow-inner">
-                        <img src="/Logo.jpeg" alt="Logo" className="h-10 object-contain rounded-lg" />
+                        <img src="/logo2.png" alt="Logo" className="h-10 object-contain rounded-lg" />
                     </div>
-                    <h2 className="text-lg font-extrabold tracking-wider text-white">Learn With Rahuul</h2>
+
                     <span className="text-[10px] text-green-400 font-bold tracking-widest mt-1 bg-green-500/10 px-2.5 py-0.5 rounded-full uppercase border border-green-500/20">Admin Panel</span>
                 </div>
-                
+
                 <div className="flex-1 py-6 space-y-2 px-4 overflow-y-auto">
                     <button onClick={() => setActiveTab('dashboard')} className={`w-full flex items-center p-3 rounded-xl transition-all duration-200 ${activeTab === 'dashboard' ? 'bg-gradient-to-r from-[#0FA958] to-[#12c467] text-white font-bold shadow-md shadow-[#0FA958]/20 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}><LayoutDashboard size={20} className="mr-3" /> Dashboard</button>
                     <button onClick={() => setActiveTab('users')} className={`w-full flex items-center p-3 rounded-xl transition-all duration-200 ${activeTab === 'users' ? 'bg-gradient-to-r from-[#0FA958] to-[#12c467] text-white font-bold shadow-md shadow-[#0FA958]/20 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}><Users size={20} className="mr-3" /> User Management</button>
                     <button onClick={() => setActiveTab('modules')} className={`w-full flex items-center p-3 rounded-xl transition-all duration-200 ${activeTab === 'modules' ? 'bg-gradient-to-r from-[#0FA958] to-[#12c467] text-white font-bold shadow-md shadow-[#0FA958]/20 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}><BookOpen size={20} className="mr-3" /> Course Content</button>
                     <button onClick={() => setActiveTab('updates')} className={`w-full flex items-center p-3 rounded-xl transition-all duration-200 ${activeTab === 'updates' ? 'bg-gradient-to-r from-[#0FA958] to-[#12c467] text-white font-bold shadow-md shadow-[#0FA958]/20 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}><Clock size={20} className="mr-3" /> Review Updates</button>
                 </div>
-                
+
                 <div className="p-4 border-t border-white/10 bg-white/5 backdrop-blur-md">
                     <div className="flex items-center mb-4">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0FA958] to-[#12c467] flex items-center justify-center font-extrabold text-white shadow-md shadow-[#0FA958]/30">A</div>
@@ -674,7 +673,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                                                 <h4 className="font-bold text-gray-800 text-lg">{session.title || `Session ${index + 1}`}</h4>
                                                 <button onClick={(e) => { e.stopPropagation(); handleDeleteSession(index); }} className="text-red-500 hover:text-red-700 p-2"><Trash2 size={20} /></button>
                                             </div>
-                                            
+
                                             {activeSessionIndex === index && (
                                                 <div className="mt-6 space-y-8 animate-fadeIn border-t pt-4">
                                                     {/* Session Details */}
@@ -719,7 +718,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                                                                 <Plus size={12} className="mr-1" /> Add MCQ
                                                             </button>
                                                         </div>
-                                                        
+
                                                         <div className="space-y-4">
                                                             {(session.mcqs || []).map((mcq, mcqIdx) => (
                                                                 <div key={mcqIdx} className="bg-white border rounded p-4 relative shadow-sm">
@@ -781,7 +780,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                 </div>
             )}
 
-                        {showUserModal && (
+            {showUserModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md animate-fadeIn">
                         <div className="flex justify-between items-center mb-6">

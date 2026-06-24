@@ -64,8 +64,8 @@ const CertificateVerification: React.FC = () => {
 
                 <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-12 lg:mb-20">
-                        <img src="/Logo.jpeg" alt="Learn With Rahuul" className="h-12 bg-white rounded object-contain p-1" />
-                        <span className="font-bold text-xl tracking-wide">Learn With Rahuul</span>
+                        <img src="/logo2.png" alt="Learn With Rahuul" className="h-12 bg-white rounded object-contain p-1" />
+
                     </div>
 
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
@@ -73,7 +73,7 @@ const CertificateVerification: React.FC = () => {
                         Credential <br />
                         <span className="text-[#0FA958]">Verification</span>
                     </h1>
-                    
+
                     <p className="text-blue-100 text-base lg:text-lg max-w-md leading-relaxed mb-12 opacity-90">
                         Ensure the authenticity of your achievements. Our verifiable credentials guarantee that your skills are recognized globally by top pharmaceutical employers.
                     </p>
@@ -107,9 +107,9 @@ const CertificateVerification: React.FC = () => {
 
             {/* Right Panel - Interaction & Display */}
             <div className="lg:w-[60%] bg-[#fafbfc] flex flex-col items-center justify-start lg:justify-center p-4 sm:p-8 lg:p-12 xl:p-20 min-h-screen">
-                
+
                 <div className="w-full max-w-3xl transition-all duration-700 ease-in-out">
-                    
+
                     {/* Input Section */}
                     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-10 mb-8 w-full">
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">Enter Certificate ID</h2>
@@ -161,7 +161,7 @@ const CertificateVerification: React.FC = () => {
                                 <CheckCircle size={28} className="text-green-100 shrink-0" />
                                 <h3 className="text-lg sm:text-xl font-bold tracking-wide text-center">Authentic Credential Verified</h3>
                             </div>
-                            
+
                             <div className="bg-white p-4 sm:p-8 rounded-b-3xl shadow-2xl border border-t-0 border-gray-100 w-full relative z-10 flex justify-center items-center overflow-hidden">
                                 <div className="w-full flex justify-center">
                                     <Certificate

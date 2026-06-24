@@ -26,8 +26,8 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout, onUpdateProfile, langua
                 </button>
 
                 <div className="flex items-center space-x-2">
-                    <img src="/Logo.jpeg" alt="Learn With Rahuul" className="h-8 md:h-10 object-contain rounded" />
-                    <span className="font-extrabold text-xl text-[#0A2A66] tracking-tight ml-2 hidden md:block">Learn With Rahuul</span>
+                    <img src="/logo2.png" alt="Learn With Rahuul" className="h-8 md:h-10 object-contain rounded" />
+
                 </div>
             </div>
             <div className="flex items-center space-x-6">

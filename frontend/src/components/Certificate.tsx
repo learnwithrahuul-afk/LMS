@@ -376,19 +376,19 @@ const Certificate: React.FC<CertificateProps> = ({
                                 <stop offset="0%" stopColor="#5bb5e8" />
                                 <stop offset="100%" stopColor="#1c7eb5" />
                             </linearGradient>
-                            
+
                             {/* Gold wave gradient */}
                             <linearGradient id="goldWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="#f6d365" />
                                 <stop offset="100%" stopColor="#dca122" />
                             </linearGradient>
-                            
+
                             {/* Magenta wave gradient */}
                             <linearGradient id="magentaWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="#c8389d" />
                                 <stop offset="100%" stopColor="#7e115e" />
                             </linearGradient>
-                            
+
                             {/* Purple wave gradient */}
                             <linearGradient id="purpleWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="#7c35ab" />
@@ -398,25 +398,25 @@ const Certificate: React.FC<CertificateProps> = ({
 
                         {/* Top-Right Blue Wave */}
                         <path d="M 520 -10 C 650 90, 850 210, 1133 210 L 1133 -10 Z" fill="url(#blueWaveGrad)" />
-                        
+
                         {/* Top-Left Gold Wave */}
                         <path d="M -10 -10 L 650 -10 C 500 50, 200 120, -10 320 Z" fill="url(#goldWaveGrad)" />
-                        
+
                         {/* Bottom-Right Magenta Wave */}
                         <path d="M 1133 500 C 950 650, 700 780, 320 804 L 1133 804 Z" fill="url(#magentaWaveGrad)" />
-                        
+
                         {/* Bottom-Left Purple Wave */}
                         <path d="M -10 620 C 150 600, 350 720, 680 804 L -10 804 Z" fill="url(#purpleWaveGrad)" />
                     </svg>
 
                     {/* Content Area */}
                     <div className="w-full h-full flex flex-col justify-between relative z-20">
-                        
+
                         {/* Top Section */}
                         <div className="flex flex-col items-center mt-2">
                             {/* Logo */}
                             <div className="mb-4">
-                                <img src="/Logo.jpeg" alt="CSV Logo" className="h-16 object-contain" />
+                                <img src="/logo2.png" alt="CSV Logo" className="h-16 object-contain" />
                             </div>
 
                             <h1 className="text-[44px] font-black text-[#0f2942] tracking-[0.1em] uppercase leading-none mb-1 text-center cert-title">
@@ -537,7 +537,7 @@ const Certificate: React.FC<CertificateProps> = ({
             </div>
 
 
-            
+
             <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 w-full max-w-md md:max-w-none">
                 <button onClick={downloadCertificate} className="flex items-center justify-center space-x-2 bg-[#1e3a8a] text-white px-8 py-3 rounded-full hover:bg-[#172554] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                     <Download size={20} />

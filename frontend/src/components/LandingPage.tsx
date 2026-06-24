@@ -32,7 +32,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
             if (data.success) {
                 setToastState('showing');
                 setEnrollData({ name: '', email: '', phone: '' });
-                
+
                 // Hide animation after 4.5 seconds
                 setTimeout(() => setToastState('hiding'), 4500);
                 // Completely unmount after 5 seconds
@@ -147,8 +147,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
             {/* Header */}
             <header className="landing-header">
                 <div className="logo-container">
-                    <img src="/Logo.jpeg" alt="Learn With Rahuul Logo" className="header-logo-img" />
-                    <span className="logo-text">Learn With Rahuul</span>
+                    <img src="/logo2.png" alt="Learn With Rahuul Logo" className="header-logo-img" />
+
                 </div>
                 <nav className="nav-links">
                     <a href="#home" title="Learn With Rahuul - Home">Home</a>
@@ -431,15 +431,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                         <form onSubmit={handleEnrollSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
                             <div>
                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#0A2A66', marginBottom: '0.4rem' }}>Full Name</label>
-                                <input type="text" placeholder="Enter your full name" required value={enrollData.name} onChange={(e) => setEnrollData({...enrollData, name: e.target.value})} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
+                                <input type="text" placeholder="Enter your full name" required value={enrollData.name} onChange={(e) => setEnrollData({ ...enrollData, name: e.target.value })} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
                             </div>
                             <div>
                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#0A2A66', marginBottom: '0.4rem' }}>Email Address</label>
-                                <input type="email" placeholder="Enter your email" required value={enrollData.email} onChange={(e) => setEnrollData({...enrollData, email: e.target.value})} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
+                                <input type="email" placeholder="Enter your email" required value={enrollData.email} onChange={(e) => setEnrollData({ ...enrollData, email: e.target.value })} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
                             </div>
                             <div>
                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#0A2A66', marginBottom: '0.4rem' }}>Phone Number</label>
-                                <input type="tel" placeholder="Enter your phone number" required value={enrollData.phone} onChange={(e) => setEnrollData({...enrollData, phone: e.target.value})} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
+                                <input type="tel" placeholder="Enter your phone number" required value={enrollData.phone} onChange={(e) => setEnrollData({ ...enrollData, phone: e.target.value })} style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '0.95rem', outline: 'none', transition: 'border-color 0.3s' }} />
                             </div>
                             <button type="submit" disabled={isSubmitting} className="cta-button pricing-cta" style={{ marginTop: '0.5rem', opacity: isSubmitting ? 0.7 : 1 }}>
                                 {isSubmitting ? 'Sending Request...' : 'Secure Your Seat Now →'}
@@ -467,7 +467,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
             <section className="community-section animate-on-scroll" style={{ padding: '5rem 5%', backgroundColor: '#ffffff', textAlign: 'center' }}>
                 <h2 className="section-title">Join Our Global Communities</h2>
                 <p style={{ color: '#666', marginBottom: '3rem', fontSize: '1.1rem' }}>Connect with professionals, get industry updates, and find job opportunities directly on WhatsApp.</p>
-                
+
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', maxWidth: '1100px', margin: '0 auto' }}>
                     <a href="https://chat.whatsapp.com/LsyHuNyCRs74JYG2Nf2duv?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
                         <div className="community-icon-wrapper" style={{ backgroundColor: '#e6f4ea', color: '#0FA958', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
@@ -476,7 +476,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                         <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>India Community</h3>
                         <p style={{ color: '#666', fontSize: '0.9rem' }}>Join the network of CSV professionals in India.</p>
                     </a>
-                    
+
                     <a href="https://chat.whatsapp.com/CtMFPtBCkMy8qv3kBB4axx?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
                         <div className="community-icon-wrapper" style={{ backgroundColor: '#e6f4ea', color: '#0FA958', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
                             <MessageCircle size={32} />
@@ -484,7 +484,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                         <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>Ireland Community</h3>
                         <p style={{ color: '#666', fontSize: '0.9rem' }}>Connect with validation experts in Ireland.</p>
                     </a>
-                    
+
                     <a href="https://chat.whatsapp.com/EmUsbRTy1s7KnN2jmJrlPZ?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
                         <div className="community-icon-wrapper" style={{ backgroundColor: '#e6f4ea', color: '#0FA958', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
                             <MessageCircle size={32} />
@@ -492,7 +492,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                         <h3 style={{ color: '#0A2A66', fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: 700 }}>USA Community</h3>
                         <p style={{ color: '#666', fontSize: '0.9rem' }}>Network with pharma IT professionals across the US.</p>
                     </a>
-                    
+
                     <a href="https://chat.whatsapp.com/CIXsFhFmxyq7vIGVAglbSg?mode=gi_t" target="_blank" rel="noopener noreferrer" className="community-card" style={{ textDecoration: 'none' }}>
                         <div className="community-icon-wrapper" style={{ backgroundColor: '#fff3cd', color: '#D4AF37', padding: '1rem', borderRadius: '50%', display: 'inline-block', marginBottom: '1rem' }}>
                             <MessageCircle size={32} />
@@ -518,8 +518,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                 </div>
 
                 <div className="footer-logo-container">
-                    <img src="/Logo.jpeg" alt="Learn With Rahuul" className="footer-logo" />
-                    <span className="footer-logo-text">Learn With Rahuul</span>
+                    <img src="/logo2.png" alt="Learn With Rahuul" className="footer-logo" />
+
                 </div>
                 <h3 className="footer-text">Your CSV Career Transformation Starts Here with Learn With Rahuul</h3>
 
