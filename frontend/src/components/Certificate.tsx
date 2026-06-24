@@ -114,6 +114,9 @@ const Certificate: React.FC<CertificateProps> = ({
             const emailKey = `email_sent_${backendCertId}`;
             if (localStorage.getItem(emailKey)) return;
 
+            // Mark as pending immediately to prevent duplicate sends during generation
+            localStorage.setItem(emailKey, 'pending');
+
             // Wait for fonts/layout to settle
             await document.fonts.ready;
             // Add a small delay to ensure rendering is complete

@@ -974,7 +974,9 @@
     }
     
     .logo-container img {
-        height: 35px;
+        height: 48px;
+        max-width: 180px;
+        object-fit: contain;
     }
     
     .logo-text {
@@ -1038,7 +1040,9 @@
     }
     
     .logo-container img {
-        height: 28px;
+        height: 40px;
+        max-width: 140px;
+        object-fit: contain;
     }
     
     .logo-text {

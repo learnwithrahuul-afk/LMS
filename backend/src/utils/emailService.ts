@@ -27,7 +27,7 @@ const baseHtmlTemplate = (title: string, content: string) => `
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://lms-frontend-blue-mu.vercel.app/Logo.jpeg" alt="Learn With Rahuul Logo" style="height: 50px; margin-bottom: 10px; border-radius: 4px;" onerror="this.style.display='none'" />
+            <img src="https://learnwithrahuul.com/logo2.png" alt="Learn With Rahuul Logo" style="height: 50px; margin-bottom: 10px; border-radius: 4px;" onerror="this.style.display='none'" />
             <h1>Learn With Rahuul</h1>
         </div>
         <div class="content">
