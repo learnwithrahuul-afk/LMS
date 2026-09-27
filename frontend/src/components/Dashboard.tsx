@@ -11,6 +11,7 @@ import { ArrowRight, CheckCircle, Play, MessageCircle, FileText, Video, Target, 
 import CourseOverview from './CourseOverview';
 import AdminDashboard from './AdminDashboard';
 import { translations } from '../translations';
+import { defaultCsvQuestions } from '../data/csvQuestions';
 
 const courseNames: Record<string, string> = {
     'csv-course': 'Computerized System Validation'
@@ -377,12 +378,22 @@ const Dashboard = () => {
             const res = await fetch(`${API_BASE_URL}/api/assessment/generate?courseId=${activeCourseId}`);
             if (res.ok) {
                 const data = await res.json();
-                setAssessmentQuestions(data);
+                if (Array.isArray(data) && data.length > 0) {
+                    setAssessmentQuestions(data);
+                } else if (activeCourseId === 'csv-course' || !activeCourseId) {
+                    setAssessmentQuestions(defaultCsvQuestions);
+                }
             } else {
-                console.error("Failed to fetch assessment");
+                console.warn("Failed to fetch assessment, using CSV questions fallback");
+                if (activeCourseId === 'csv-course' || !activeCourseId) {
+                    setAssessmentQuestions(defaultCsvQuestions);
+                }
             }
         } catch (error) {
-            console.error("Error starting assessment", error);
+            console.error("Error starting assessment, fallback to local CSV questions", error);
+            if (activeCourseId === 'csv-course' || !activeCourseId) {
+                setAssessmentQuestions(defaultCsvQuestions);
+            }
         } finally {
             setIsAssessmentLoading(false);
         }
@@ -946,7 +957,7 @@ const Dashboard = () => {
                                 <div className="flex flex-col items-center justify-center h-96">
                                     <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600 mb-4"></div>
                                     <p className="text-xl font-medium text-gray-600 animate-pulse">
-                                        {assessmentResult ? "Grading your assessment with AI..." : "Generating your personalized assessment..."}
+                                        {assessmentResult ? "Evaluating your assessment..." : "Loading assessment questions..."}
                                     </p>
                                 </div>
                             ) : assessmentResult ? (
@@ -962,7 +973,7 @@ const Dashboard = () => {
                                     </p>
 
                                     <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 max-w-2xl w-full text-left">
-                                        <h3 className="font-bold text-gray-700 mb-2">AI Instructor Feedback:</h3>
+                                        <h3 className="font-bold text-gray-700 mb-2">Assessment Feedback:</h3>
                                         <p className="text-gray-600 leading-relaxed">{assessmentResult.feedback || "Good effort! Review the modules and try again to improve your score."}</p>
                                     </div>
 
@@ -1004,38 +1015,50 @@ const Dashboard = () => {
                                         </div>
                                     </div>
 
-                                    <div className="space-y-8">
-                                        {assessmentQuestions.map((q, idx) => (
-                                            <div key={q.id || idx} className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                                                <p className="font-semibold text-lg text-gray-800 mb-4 flex">
-                                                    <span className="bg-[#0FA958] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3 flex-shrink-0">
-                                                        {idx + 1}
-                                                    </span>
-                                                    {q.question}
-                                                </p>
-                                                <div className="space-y-3 ml-11">
-                                                    {q.options.map((option: string, optIdx: number) => (
-                                                        <label
-                                                            key={optIdx}
-                                                            className={`flex items-center p-4 rounded-lg border cursor-pointer transition-all ${assessmentAnswers[q.id || idx] === option
-                                                                ? 'border-[#0FA958] bg-[#eef2f7] ring-1 ring-[#0FA958]'
-                                                                : 'border-gray-200 hover:bg-white hover:border-blue-300'
-                                                                }`}
-                                                        >
-                                                            <input
-                                                                type="radio"
-                                                                name={`q-${q.id || idx}`}
-                                                                className="w-4 h-4 text-[#0FA958] focus:ring-[#0FA958]"
-                                                                checked={assessmentAnswers[q.id || idx] === option}
-                                                                onChange={() => setAssessmentAnswers(prev => ({ ...prev, [q.id || idx]: option }))}
-                                                            />
-                                                            <span className="ml-3 text-gray-700">{option}</span>
-                                                        </label>
-                                                    ))}
+                                    {assessmentQuestions.length === 0 ? (
+                                        <div className="text-center py-16">
+                                            <p className="text-gray-600 text-lg mb-4">No questions could be loaded.</p>
+                                            <button
+                                                onClick={startAssessment}
+                                                className="bg-[#0FA958] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-[#0c8746] transition-all"
+                                            >
+                                                Reload Questions
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-8">
+                                            {assessmentQuestions.map((q, idx) => (
+                                                <div key={q.id || idx} className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                                                    <p className="font-semibold text-lg text-gray-800 mb-4 flex">
+                                                        <span className="bg-[#0FA958] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3 flex-shrink-0">
+                                                            {idx + 1}
+                                                        </span>
+                                                        {q.question}
+                                                    </p>
+                                                    <div className="space-y-3 ml-11">
+                                                        {q.options.map((option: string, optIdx: number) => (
+                                                            <label
+                                                                key={optIdx}
+                                                                className={`flex items-center p-4 rounded-lg border cursor-pointer transition-all ${assessmentAnswers[q.id || idx] === option
+                                                                    ? 'border-[#0FA958] bg-[#eef2f7] ring-1 ring-[#0FA958]'
+                                                                    : 'border-gray-200 hover:bg-white hover:border-blue-300'
+                                                                    }`}
+                                                            >
+                                                                <input
+                                                                    type="radio"
+                                                                    name={`q-${q.id || idx}`}
+                                                                    className="w-4 h-4 text-[#0FA958] focus:ring-[#0FA958]"
+                                                                    checked={assessmentAnswers[q.id || idx] === option}
+                                                                    onChange={() => setAssessmentAnswers(prev => ({ ...prev, [q.id || idx]: option }))}
+                                                                />
+                                                                <span className="ml-3 text-gray-700">{option}</span>
+                                                            </label>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                            ))}
+                                        </div>
+                                    )}
 
                                     <div className="mt-10 flex justify-end gap-4 pb-10">
                                         <button
@@ -1046,8 +1069,8 @@ const Dashboard = () => {
                                         </button>
                                         <button
                                             onClick={submitAssessment}
-                                            disabled={Object.keys(assessmentAnswers).length < assessmentQuestions.length}
-                                            className={`px-8 py-3 rounded-full font-bold text-white shadow-lg transition-all flex items-center ${Object.keys(assessmentAnswers).length < assessmentQuestions.length
+                                            disabled={assessmentQuestions.length === 0 || Object.keys(assessmentAnswers).length < assessmentQuestions.length}
+                                            className={`px-8 py-3 rounded-full font-bold text-white shadow-lg transition-all flex items-center ${assessmentQuestions.length === 0 || Object.keys(assessmentAnswers).length < assessmentQuestions.length
                                                 ? 'bg-gray-300 cursor-not-allowed'
                                                 : 'bg-[#0FA958] hover:bg-[#0c8746] transform hover:scale-105'
                                                 }`}
